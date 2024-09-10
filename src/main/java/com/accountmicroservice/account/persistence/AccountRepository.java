@@ -1,6 +1,6 @@
 package com.accountmicroservice.account.persistence;
 
-import com.accountmicroservice.account.model.Account;
+import com.accountmicroservice.account.models.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
