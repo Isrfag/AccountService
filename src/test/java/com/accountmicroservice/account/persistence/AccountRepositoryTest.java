@@ -21,6 +21,8 @@ public class AccountRepositoryTest {
 
     @Test
     void shouldCreateAccount(){
+        Account account = new Account();
+        accRepo.save(account);
     }
 
 
