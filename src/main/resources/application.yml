@@ -2,7 +2,7 @@ spring:
   application:
     name: myAccountService
   profiles:
-    active: dev
+    active: prod
 
 ---
 spring:
@@ -40,13 +40,18 @@ spring:
 
   sql.init.mode: never
   datasource:
-    url: jdbc:mysql://localhost/accounts_db
+    url: "jdbc:mysql://localhost/productos_db"
     driverClassName: com.mysql.cj.jdbc.Driver
     username: productos_user
     password: prod123
+
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate.ddl-auto: update
+    hibernate:
+      ddl-auto: update
+      generate-ddl: false
+    defer-datasource-initialization: false
 
 logging:
   level:
