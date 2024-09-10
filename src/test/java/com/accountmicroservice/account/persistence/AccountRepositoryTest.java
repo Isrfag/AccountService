@@ -1,5 +1,6 @@
 package com.accountmicroservice.account.persistence;
 
+import com.accountmicroservice.account.models.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,9 @@ public class AccountRepositoryTest {
         assertThat(accRepo, notNullValue());
     }
 
+    @Test
+    void shouldCreateAccount(){
+    }
 
 
 
