@@ -16,56 +16,55 @@ public class AccountController {
     @Autowired
     IAccountService accountService;
 
-    @RequestMapping("/new")
+    @RequestMapping(value = "",method = RequestMethod.POST)
     public Account createAccount (@RequestBody Account newAccount) {
         return accountService.create(newAccount);
     }
 
-    @RequestMapping("")
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public List<Account> getAllAccounts() {
         List<Account>allAcounts = new ArrayList<>();
         allAcounts= accountService.getAccounts();
         return allAcounts;
     }
 
-    @RequestMapping("/{id}")
+    @RequestMapping(value="/{id}",method = RequestMethod.GET)
     public Account getSingleAccount(@PathVariable("id") Integer id) {
         Account account = accountService.getAccount(id);
         return account;
     }
 
-    @RequestMapping("/customer{customerId}")
+    @RequestMapping(value="/customer{customerId}",method = RequestMethod.GET)
     public List<Account> getAccountsByCustomer(@PathVariable("customerId")Integer customerId) {
         List<Account> accounts = accountService.getAccountByOwnerId(customerId);
         return accounts;
     }
 
-    @RequestMapping("/update/{accountId}")
-    public Account updateAccount(@PathVariable("accountId") Integer id) {
-        Account account = accountService.getAccount(id);
-        account.setBalance(200);
+    @RequestMapping(value="/update/{accountId}",method = RequestMethod.PUT)
+    public Account updateAccount(@PathVariable("accountId") Integer id, @RequestBody Account account) {
+        account.setId(id);
         accountService.updateAccount(account.getId(),account);
         return account;
     }
 
-    @RequestMapping("/delete{id}")
+    @RequestMapping(value="/delete{id}",method = RequestMethod.DELETE)
     public boolean deleteAccount(@PathVariable("id") Integer id) {
         accountService.delete(id);
         return true;
     }
 
-    @RequestMapping("/delete/{ownerId}")
+    @RequestMapping(value = "/delete/{ownerId}",method = RequestMethod.DELETE)
     public boolean deleteAccountByOwnerId(@PathVariable("ownerId") Integer ownerId) {
         accountService.deleteAccountsUsingOwnerId(ownerId);
         return true;
     }
 
-    @RequestMapping("/balanceAdd{id}/{balance}")
+    @RequestMapping(value = "/balanceAdd{id}/{balance}",method = RequestMethod.POST)
     public Account addBalanceToAccount(@PathVariable("id")Integer id, @PathVariable("balance") Integer balance) {
         return accountService.addBalance(id,balance);
     }
 
-    @RequestMapping("/balanceWith{id}/{balance}")
+    @RequestMapping(value = "/balanceWith{id}/{balance}", method = RequestMethod.POST)
     public Account withdrawBalanceToAccount(@PathVariable("id")Integer id, @PathVariable("balance") Integer balance) {
         return accountService.addBalance(id,balance);
     }
