@@ -16,18 +16,29 @@ public class ServiceInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("REQUEST:" + request.getRequestURI() + "::" + request.getMethod() + "::" + getRemoteAddr(request) + "::" + request.getHeader("account-request-reviewed-true"));
+        logger.info("Llamando al Interceptor");
+        logger.info (
+                "PRE-HANDLE" +
+                "REQUEST:"
+                        + "Método: " + request.getMethod()
+                        + "Uri: " + request.getRequestURI()
+                        + "Query params" + request.getQueryString()
+                        + "Ip de origen: " + getRemoteAddr(request)
+
+            );
+        response.setHeader("account-request-reviewed", "true");
+
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        logger.info("this may happends after completion");
+        logger.info("POST HANDLE : this may happends after completion");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("his happends after completion");
+        logger.info("AFTER COMPLETION: his happends after completion");
     }
 
       private String getRemoteAddr(HttpServletRequest request) {
